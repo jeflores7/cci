@@ -71,7 +71,7 @@ func TestMain(t *testing.T) {
 	for _, testCase := range testCases {
 		tc := testCase
 		t.Run(tc.name, func(t *testing.T) {
-			// t.Parallel()
+			t.Parallel()
 
 			gotBool := isPermutation(tc.a, tc.b)
 			assert.Equal(t, tc.wantBool, gotBool)
@@ -158,6 +158,9 @@ func hash(r rune) int {
 	return int(r - 'a')
 }
 
+// Note:
+// 1. Instead of making the hashtable len(a), if we know the alphabet
+//    it would be less collisions if we used len(alphabet) instead
 func makeHashTable(a string) []int {
 	// Not implemented on paper
 	ht := make([]int, len(a))
