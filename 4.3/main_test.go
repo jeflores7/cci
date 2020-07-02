@@ -61,6 +61,14 @@ func TestGetDepthLists(t *testing.T) {
 
 			gotMap := getDepthLists(tc.inRoot)
 			assert.Equal(t, tc.wantMap, gotMap)
+
+			gotMap = nil
+			gotMap = getDepthListsBFS(tc.inRoot)
+			assert.Equal(t, tc.wantMap, gotMap)
+
+			gotMap = nil
+			gotMap = getDepthListsBFSBetter(tc.inRoot)
+			assert.Equal(t, tc.wantMap, gotMap)
 		})
 	}
 }
