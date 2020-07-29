@@ -53,6 +53,22 @@ func TestFindBuildPath(t *testing.T) {
 			wantPath: []string{"d", "f", "b", "c", "a", "e", "g"},
 			wantErr:  nil,
 		},
+		{
+			name:       "fail cycle",
+			inProjects: []string{"a", "b", "c", "d", "e", "f", "g"},
+			inDeps: [][]string{
+				{"f", "a"},
+				{"f", "b"},
+				{"f", "c"},
+				{"d", "g"},
+				{"c", "f"},
+				{"b", "a"},
+				{"b", "e"},
+				{"a", "e"},
+			},
+			wantPath: nil,
+			wantErr:  errors.New(""),
+		},
 	}
 	for _, testCase := range testCases {
 		// Local version of the testCase variable for parallel execution
